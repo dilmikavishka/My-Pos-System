@@ -1,0 +1,68 @@
+body {
+    background-color: #f8f9fa;
+}
+
+
+.customer-management {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input customization */
+.form-control {
+    border: 1px solid #dedede;
+    height: 40px;
+}
+
+.form-label{
+    color: black;
+}
+
+/* Button styles */
+.btn-custom {
+    min-width: 90px;
+    padding: 8px 16px;
+}
+
+.btn-success {
+    background-color: #00aa00;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-light {
+    background-color: #f8f9fa;
+    border-color: #ccc;
+}
+
+/* Table customization */
+.table-container {
+    margin-top: 15px;
+}
+
+.table thead {
+    background-color: #ff00ff;
+    color: white;
+    text-align: center;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .form-container, .table-container {
+        margin-bottom: 20px;
+    }
+}

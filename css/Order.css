@@ -1,0 +1,26 @@
+.order-card {
+    background-color: #ffffff !important;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.btn-purple {
+    background-color: #8a2be2;
+    color: white;
+}
+
+.btn-purple:hover {
+    background-color: #7a1bd8;
+}
+
+.total-box {
+    font-weight: bold;
+}
+
+/* Adjust form margins on small screens */
+@media (max-width: 768px) {
+    .order-card {
+        padding: 15px;
+    }
+}

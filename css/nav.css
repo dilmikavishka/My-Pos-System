@@ -1,0 +1,97 @@
+
+nav{
+    background-color: #ffffff;
+}
+
+
+.navbar-nav {
+    margin-right: 150px;
+}
+
+.nav-item {
+    margin-right: 50px;
+}
+
+.nav-link {
+    background: linear-gradient(90deg, hsla(205, 72%, 55%, 1) 0%, hsla(197, 69%, 43%, 1) 0%, hsla(280, 73%, 50%, 1) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 20px;
+}
+
+.navbar-brand {
+    background: linear-gradient(90deg, hsla(205, 72%, 55%, 1) 0%, hsla(197, 69%, 43%, 1) 0%, hsla(280, 73%, 50%, 1) 70%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.navbar {
+    height: 80px;
+}
+
+.navbar-brand, .navbar-nav .nav-link {
+    line-height: 80px;
+}
+
+.navbar-nav .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .navbar-nav {
+        margin-top: 10px;
+        margin-right: 100px; /* Adjust margin-right for medium screens */
+    }
+
+    .nav-item {
+        margin-right: 20px; /* Reduce spacing between nav items */
+    }
+
+    .navbar {
+        height: auto;
+        padding: 10px;
+    }
+
+    .navbar-brand, .navbar-nav .nav-link {
+        line-height: normal; /* Reset line height on smaller screens */
+    }
+
+    .nav-link {
+        font-size: 18px; /* Slightly reduce font size for smaller screens */
+    }
+
+    .navbar-brand {
+        font-size: 25px; /* Adjust brand size for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Start nav links from the left */
+    .navbar-nav {
+        margin-right: 0;
+        text-align: left; /* Align links to the left */
+    }
+
+    .nav-item {
+        margin-right: 0; /* Remove right margin for mobile devices */
+        margin-bottom: 10px; /* Add bottom margin for spacing */
+    }
+
+    .nav-link {
+        display: inline-block;
+        font-size: 16px; /* Further reduce font size for mobile */
+    }
+
+    .navbar-brand {
+        font-size: 22px; /* Reduce brand size further on mobile */
+    }
+
+    .navbar-collapse {
+        text-align: left; /* Align collapsed menu to the left */
+    }
+}
