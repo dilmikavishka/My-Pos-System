@@ -1,0 +1,11 @@
+.login-box {
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
+    margin-top: 10%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+}
