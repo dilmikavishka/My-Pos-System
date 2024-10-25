@@ -16,7 +16,6 @@
     <script src="controllers/chart.js"></script>
 </head>
 <body>
-
 <section id="login">
     <div class="login-box">
         <h2 class="text-center">Login</h2>
@@ -124,7 +123,7 @@
                         <h3 class="header-title mb-4">Customer Management</h3>
                         <div class="mb-3">
                             <label for="customerId" class="form-label">Customer Id</label>
-                            <input type="text" class="form-control" id="customerId" placeholder="Enter Customer Id">
+                            <input type="text" class="form-control" id="customerId" placeholder="Enter Customer Id" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Full Name</label>
@@ -135,15 +134,15 @@
                             <input type="text" class="form-control" id="address" placeholder="Enter Address">
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="text" class="form-control" id="salary" placeholder="Enter Salary">
+                            <label for="customer-email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="customer-email" placeholder="Enter Email">
                         </div>
 
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-success">Submit</button>
-                            <button type="button" class="btn btn-outline-warning">Update</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-outline-success" id="customer-save-button">Save</button>
+                            <button type="button" class="btn btn-outline-warning" id="customer-update-button">Update</button>
+<!--                            <button type="button" class="btn btn-outline-danger">Delete</button>-->
                             <input class="btn btn-outline-primary" type="reset" value="Reset">
                         </div>
                     </div>
@@ -152,10 +151,10 @@
                 <!-- Customer Table -->
                 <div class="col-lg-6 table-container">
                     <div class="mb-4 d-flex align-items-center">
-                        <input type="text" class="form-control me-2" placeholder="Search Customer">
-                        <select class="form-select">
-                            <option>customer name</option>
-                            <option>customer address</option>
+                        <input type="text" class="form-control me-2" placeholder="Search Customer" id="search-input">
+                        <select class="form-select" id="search-filter">
+                            <option value="customer-name">Customer Name</option>
+                            <option value="customer-address">Customer Address</option>
                         </select>
                     </div>
 
@@ -166,10 +165,11 @@
                                 <th>Customer Id</th>
                                 <th>Full Name</th>
                                 <th>Address</th>
-                                <th>Salary</th>
+                                <th>Email</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="customerTable">
                             <!-- Dynamic customer rows go here -->
                             </tbody>
                         </table>
@@ -189,40 +189,40 @@
                     <div class="customer-management ">
                         <h3 class="header-title mb-4">Item Management</h3>
                         <div class="mb-3">
-                            <label for="customerId" class="form-label">Customer Id</label>
-                            <input type="text" class="form-control" id="Item_Id" placeholder="Enter Customer Id">
+                            <label for="customerId" class="form-label">Item Id</label>
+                            <input type="text" class="form-control" id="Item_Id" placeholder="Enter Customer Id" disabled>
                         </div>
                         <div class="mb-3">
-                            <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="Item_Name" placeholder="Enter Full Name">
+                            <label for="fullName" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" id="Item_Name" placeholder="Enter Item Name">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="Item_Desc" placeholder="Enter Address">
+                            <label for="address" class="form-label">Qty</label>
+                            <input type="text" class="form-control" id="Item_qty" placeholder="Enter qty">
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="text" class="form-control" id="price" placeholder="Enter Salary">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="price" placeholder="Enter Price">
                         </div>
 
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-outline-success">Submit</button>
-                            <button type="button" class="btn btn-outline-warning">Update</button>
-                            <button type="button" class="btn btn-outline-danger">Delete</button>
+                            <button type="button" class="btn btn-outline-success" id="item_save_button">Save</button>
+                            <button type="button" class="btn btn-outline-warning" id="item_update_button">Update</button>
+                            <!--<button type="button" class="btn btn-outline-danger" id="item_delete_button">Delete</button>-->
                             <input class="btn btn-outline-primary" type="reset" value="Reset">
                         </div>
                     </div>
                 </div>
 
-                <!-- Customer Table -->
+                <!-- Item Table -->
                 <div class="col-lg-6 table-container">
                     <div class="mb-4 d-flex align-items-center">
-                        <input type="text" class="form-control me-2" placeholder="Search Item">
+                        <input type="text" class="form-control me-2" placeholder="Search Item" id="search_item">
                         <select class="form-select">
                             <option>Item ID</option>
                             <option>Item Name</option>
-                            <option>Item Desc</option>
+                            <option>Item Qty</option>
                             <option>Item Price</option>
                         </select>
                     </div>
@@ -233,12 +233,13 @@
                             <tr>
                                 <th>Item Id</th>
                                 <th>Item Name</th>
-                                <th>DescriptionP</th>
+                                <th>Item Qty</th>
                                 <th>Price</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <!-- Dynamic customer rows go here -->
+                            <tbody id="item-tbody">
+                            <!-- Dynamic item rows go here -->
                             </tbody>
                         </table>
                     </div>
@@ -370,9 +371,8 @@
     </div>
 </section>
 
+<script src="assets/lib/jquery-3.7.1.min.js"></script>
 <script>
-
-
     let loginbtn = document.getElementById("loginbutton");
     let homeNave = document.getElementById("home-nav");
     let customerNave = document.getElementById("customer-nav");
@@ -383,13 +383,10 @@
     let loginsection = document.getElementById("login")
     let headers = document.getElementById("header")
 
-
     let home = document.getElementById("home");
     let customer = document.getElementById("manageCustomer");
     let item = document.getElementById("manageItem");
     let orders = document.getElementById("manageOrder");
-
-
 
     window.onload = function() {
         headers.style.display = "none";
@@ -514,8 +511,8 @@
         });
     });
 </script>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="Js/Customer.js"></script>
+<script src="Js/Item.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
