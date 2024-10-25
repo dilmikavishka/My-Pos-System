@@ -13,9 +13,30 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="controllers/chart.js"></script>
 </head>
 <body>
-
+<section id="login">
+    <div class="login-box">
+        <h2 class="text-center">Login</h2>
+        <form>
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" class="form-check-input" id="rememberMe">
+                <label class="form-check-label" for="rememberMe">Remember me</label>
+            </div>
+            <button type="submit" id="loginbutton" class="btn btn-primary btn-block">Login</button>
+            <p class="text-center mt-3">Don't have an account? <a href="#">Register here</a></p>
+        </form>
+    </div>
+    </div></section>
 
 <header id="header">
     <!--System Name-->
@@ -46,7 +67,7 @@
 </header>
 
 <section id="home">
-    <div class="container mt-5 ">
+    <div class="container mt-5">
         <div class="row">
             <!-- Left-aligned cards -->
             <div class="col-md-4">
@@ -55,7 +76,7 @@
                         <div>
                             <h3 class="card-title">Customers</h3>
                             <p class="card-number">120</p>
-                            <a href="#" id="customer_link" class="card-link">Manage customers</a>
+                            <a href="#" id="card-link-customer" class="card-link-customer" style="text-decoration: none">Manage customers</a>
                         </div>
                         <div>
                             <img src="assets/icon/icons8-person-100.png" alt="Customer Icon" class="card-icon">
@@ -68,11 +89,23 @@
                         <div>
                             <h3 class="card-title">Orders</h3>
                             <p class="card-number">300</p>
-                            <a href="#" class="card-link">Manage orders</a>
+                            <a href="#" class="card-link-orders" id="card-link-orders" style="text-decoration: none">Manage orders</a>
                         </div>
                         <div>
                             <img src="assets/icon/icons8-package-100.png" alt="Order Icon" class="card-icon">
                         </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!-- Right-aligned chart -->
+            <div class="col-md-8">
+                <div class="card" id="chart-home">
+                    <div class="card-body">
+                        <h3 class="card-title">Sales Overview</h3>
+                        <canvas id="myChart" width="400" height="200"></canvas>
                     </div>
                 </div>
             </div>
@@ -90,7 +123,7 @@
                         <h3 class="header-title mb-4">Customer Management</h3>
                         <div class="mb-3">
                             <label for="customerId" class="form-label">Customer Id</label>
-                            <input type="text" class="form-control" id="customerId" placeholder="Enter Customer Id">
+                            <input type="text" class="form-control" id="customerId" placeholder="Enter Customer Id" disabled>
                         </div>
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Full Name</label>
@@ -101,16 +134,16 @@
                             <input type="text" class="form-control" id="address" placeholder="Enter Address">
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="text" class="form-control" id="salary" placeholder="Enter Salary">
+                            <label for="customer-email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="customer-email" placeholder="Enter Email">
                         </div>
 
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-success btn-custom">Submit</button>
-                            <button type="button" class="btn btn-warning btn-custom">Update</button>
-                            <button type="button" class="btn btn-danger btn-custom">Delete</button>
-                            <button type="button" class="btn btn-light btn-custom">Reset</button>
+                            <button type="button" class="btn btn-outline-success" id="customer-save-button">Save</button>
+                            <button type="button" class="btn btn-outline-warning" id="customer-update-button">Update</button>
+                            <!--                            <button type="button" class="btn btn-outline-danger">Delete</button>-->
+                            <input class="btn btn-outline-primary" type="reset" value="Reset">
                         </div>
                     </div>
                 </div>
@@ -118,10 +151,10 @@
                 <!-- Customer Table -->
                 <div class="col-lg-6 table-container">
                     <div class="mb-4 d-flex align-items-center">
-                        <input type="text" class="form-control me-2" placeholder="Search Customer">
-                        <select class="form-select">
-                            <option>customer name</option>
-                            <option>customer address</option>
+                        <input type="text" class="form-control me-2" placeholder="Search Customer" id="search-input">
+                        <select class="form-select" id="search-filter">
+                            <option value="customer-name">Customer Name</option>
+                            <option value="customer-address">Customer Address</option>
                         </select>
                     </div>
 
@@ -132,10 +165,11 @@
                                 <th>Customer Id</th>
                                 <th>Full Name</th>
                                 <th>Address</th>
-                                <th>Salary</th>
+                                <th>Email</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="customerTable">
                             <!-- Dynamic customer rows go here -->
                             </tbody>
                         </table>
@@ -155,40 +189,40 @@
                     <div class="customer-management ">
                         <h3 class="header-title mb-4">Item Management</h3>
                         <div class="mb-3">
-                            <label for="customerId" class="form-label">Customer Id</label>
-                            <input type="text" class="form-control" id="Item_Id" placeholder="Enter Customer Id">
+                            <label for="customerId" class="form-label">Item Id</label>
+                            <input type="text" class="form-control" id="Item_Id" placeholder="Enter Customer Id" disabled>
                         </div>
                         <div class="mb-3">
-                            <label for="fullName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="Item_Name" placeholder="Enter Full Name">
+                            <label for="fullName" class="form-label">Item Name</label>
+                            <input type="text" class="form-control" id="Item_Name" placeholder="Enter Item Name">
                         </div>
                         <div class="mb-3">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="Item_Desc" placeholder="Enter Address">
+                            <label for="address" class="form-label">Qty</label>
+                            <input type="text" class="form-control" id="Item_qty" placeholder="Enter qty">
                         </div>
                         <div class="mb-3">
-                            <label for="salary" class="form-label">Salary</label>
-                            <input type="text" class="form-control" id="price" placeholder="Enter Salary">
+                            <label for="price" class="form-label">Price</label>
+                            <input type="text" class="form-control" id="price" placeholder="Enter Price">
                         </div>
 
                         <!-- Buttons -->
                         <div class="d-flex justify-content-between">
-                            <button type="button" class="btn btn-success btn-custom">Submit</button>
-                            <button type="button" class="btn btn-warning btn-custom">Update</button>
-                            <button type="button" class="btn btn-danger btn-custom">Delete</button>
-                            <button type="button" class="btn btn-light btn-custom">Reset</button>
+                            <button type="button" class="btn btn-outline-success" id="item_save_button">Save</button>
+                            <button type="button" class="btn btn-outline-warning" id="item_update_button">Update</button>
+                            <!--<button type="button" class="btn btn-outline-danger" id="item_delete_button">Delete</button>-->
+                            <input class="btn btn-outline-primary" type="reset" value="Reset">
                         </div>
                     </div>
                 </div>
 
-                <!-- Customer Table -->
+                <!-- Item Table -->
                 <div class="col-lg-6 table-container">
                     <div class="mb-4 d-flex align-items-center">
-                        <input type="text" class="form-control me-2" placeholder="Search Item">
+                        <input type="text" class="form-control me-2" placeholder="Search Item" id="search_item">
                         <select class="form-select">
                             <option>Item ID</option>
                             <option>Item Name</option>
-                            <option>Item Desc</option>
+                            <option>Item Qty</option>
                             <option>Item Price</option>
                         </select>
                     </div>
@@ -199,12 +233,13 @@
                             <tr>
                                 <th>Item Id</th>
                                 <th>Item Name</th>
-                                <th>DescriptionP</th>
+                                <th>Item Qty</th>
                                 <th>Price</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
-                            <tbody>
-                            <!-- Dynamic customer rows go here -->
+                            <tbody id="item-tbody">
+                            <!-- Dynamic item rows go here -->
                             </tbody>
                         </table>
                     </div>
@@ -301,7 +336,7 @@
 
             <!-- Order Summary Section -->
             <div class="col-md-6">
-                <div class="order-card">
+                <div class="order-card" id="order-sum-card">
                     <h5>Order Summary</h5>
                     <form>
                         <div class="row mb-3">
@@ -336,12 +371,150 @@
     </div>
 </section>
 
+<script src="assets/lib/jquery-3.7.1.min.js"></script>
+<script>
+    let loginbtn = document.getElementById("loginbutton");
+    let homeNave = document.getElementById("home-nav");
+    let customerNave = document.getElementById("customer-nav");
+    let itemNave = document.getElementById("item-nav");
+    let orderNave = document.getElementById("order-nav");
+    let cardCustomerNav = document.getElementById("card-link-customer")
+    let cardOrderNav = document.getElementById("card-link-orders")
+    let loginsection = document.getElementById("login")
+    let headers = document.getElementById("header")
+
+    let home = document.getElementById("home");
+    let customer = document.getElementById("manageCustomer");
+    let item = document.getElementById("manageItem");
+    let orders = document.getElementById("manageOrder");
+
+    window.onload = function() {
+        headers.style.display = "none";
+        loginsection.style.display = "block";
+        home.style.display = "none";
+        customer.style.display = "none";
+        item.style.display = "none";
+        orders.style.display = "none";
+    }
+
+    loginbtn.onclick = function (){
+        headers.style.display = "block";
+        loginsection.style.display = "none";
+        home.style.display = "block";
+        customer.style.display = "none";
+        item.style.display = "none";
+        orders.style.display = "none";
+    }
+
+    customer.style.display = "none";
+    item.style.display = "none";
+    orders.style.display = "none";
+
+    homeNave.addEventListener('click',function (){
+        home.style.display="block";
+        customer.style.display = "none";
+        item.style.display = "none";
+        orders.style.display = "none";
+
+    })
+
+    cardCustomerNav.addEventListener('click',function (){
+        customer.style.display="block";
+        home.style.display="none";
+        item.style.display="none";
+        orders.style.display="none";
+
+    })
+
+    customerNave.addEventListener('click',function (){
+        customer.style.display="block";
+        home.style.display="none";
+        item.style.display="none";
+        orders.style.display="none";
+
+    })
+
+    itemNave.addEventListener('click',function (){
+        item.style.display="block";
+        home.style.display="none";
+        customer.style.display="none";
+        orders.style.display="none";
+
+    })
+
+    orderNave.addEventListener('click',function (){
+        orders.style.display="block";
+        home.style.display="none";
+        customer.style.display="none";
+        item.style.display="none";
+
+    })
+
+    cardOrderNav.addEventListener('click',function (){
+        orders.style.display="block";
+        home.style.display="none";
+        customer.style.display="none";
+        item.style.display="none";
+
+    })
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('myChart').getContext('2d');
 
 
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                datasets: [{
+                    label: 'Sales',
+                    data: [12, 19, 3, 5, 2,4,9,20,10,37,34,12],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255,102,224,0.2)',
+                        'rgba(255,207,102,0.2)',
+                        'rgba(102,133,255,0.2)',
+                        'rgba(102,255,115,0.2)',
+                        'rgba(255,102,207,0.2)',
+                        'rgba(245,255,102,0.2)',
+                        'rgba(215,116,16,0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255,102,224,1)',
+                        'rgba(255,207,102,1)',
+                        'rgba(102,133,255,1)',
+                        'rgba(102,255,115,1)',
+                        'rgba(255,102,207,1)',
+                        'rgba(245,255,102,1)',
+                        'rgba(215,116,16,1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    });
+</script>
+<script src="Js/Customer.js"></script>
+<script src="Js/Item.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-<script src="controllers/jquery.min.js"></script>
-<script type="module" src="Js/Item.js"></script>
-<script type="module" src="Js/Customer.js"></script>
-<script type="module" src="controllers/index.js"></script>
 </body>
 </html>
