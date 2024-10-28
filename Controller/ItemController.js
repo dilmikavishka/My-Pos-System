@@ -1,4 +1,4 @@
-let item_arr = [];
+
 
 function generateId() {
     return item_arr.length + 1;
