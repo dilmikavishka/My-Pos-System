@@ -186,10 +186,6 @@
                 <div class="col-lg-6 form-container">
                     <div class="customer-management ">
                         <h3 class="header-title mb-4">Item Management</h3>
-                       <!-- <div class="mb-3">
-                            <label for="customerId" class="form-label">Item Id</label>
-                            <input type="text" class="form-control" id="Item_Id" placeholder="Enter Customer Id" disabled>
-                        </div>-->
                         <div class="mb-3">
                             <label for="fullName" class="form-label">Item Name</label>
                             <input type="text" class="form-control" id="Item_Name" placeholder="Enter Item Name">
@@ -207,8 +203,7 @@
                         <div class="d-flex justify-content-between">
                             <button type="button" class="btn btn-outline-success" id="item_save_button">Save</button>
                             <button type="button" class="btn btn-outline-warning" id="item_update_button">Update</button>
-                            <!--<button type="button" class="btn btn-outline-danger" id="item_delete_button">Delete</button>-->
-                            <input class="btn btn-outline-primary" type="reset" value="Reset">
+                            <button type="button" class="btn btn-outline-danger" id="item_delete_button">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -218,7 +213,6 @@
                     <div class="mb-4 d-flex align-items-center">
                         <input type="text" class="form-control me-2" placeholder="Search Item" id="search_item">
                         <select class="form-select">
-                            <option>Item ID</option>
                             <option>Item Name</option>
                             <option>Item Qty</option>
                             <option>Item Price</option>
@@ -229,11 +223,9 @@
                         <table class="table table-bordered">
                             <thead>
                             <tr>
-                                <th>Item Id</th>
                                 <th>Item Name</th>
+                                <th>Unit Price</th>
                                 <th>Item Qty</th>
-                                <th>Price</th>
-                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody id="item-tbody">
@@ -510,7 +502,7 @@
     });
 </script>
 <script src="Controller/CustomerController.js" type="module"></script>
-<script src="Controller/ItemController.js"></script>
+<script src="Controller/ItemController.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
