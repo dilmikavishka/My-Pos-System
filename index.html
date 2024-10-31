@@ -244,7 +244,7 @@
         <!-- Order Management Title -->
         <div class="d-flex align-items-center mb-4">
             <h4 class="me-auto">Order Management</h4>
-            <span class="ms-auto text-muted">Date: 10/03/2024</span>
+            <span class="ms-auto text-muted">Date: <span id="currentDate"></span></span>
         </div>
 
         <!-- Order Reference Section -->
@@ -259,34 +259,35 @@
                         </div>
                         <div class="mb-3">
                             <label for="customerId-Order" class="form-label">Customer ID</label>
-                            <input type="text" class="form-control" id="customerId-Order" placeholder="Enter Customer ID">
+                            <select class="form-control" id="customerId-Order"></select>
                         </div>
                         <div class="mb-3">
                             <label for="customerName" class="form-label">Customer Name</label>
-                            <input type="text" class="form-control" id="customerName" placeholder="Enter Customer Name">
+                            <input type="text" class="form-control" id="customerName" placeholder="Enter Customer Name" readonly>
                         </div>
                     </form>
                 </div>
             </div>
 
+
+
             <!-- Item Table Section -->
             <div class="col-md-6">
                 <div class="order-card">
                     <h5>Items</h5>
-                    <table class="table table-bordered">
+                    <table class="table table-bordered" id="itemTable">
                         <thead>
                         <tr>
                             <th scope="col">Item ID</th>
                             <th scope="col">Description</th>
                             <th scope="col">Qty</th>
                             <th scope="col">Ordering Qty</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Customer Name</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="itemsList">
                         <!-- Dynamic Rows Will Go Here -->
-                        <tr>
-                            <td colspan="4" class="text-center text-muted">No items added yet</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -301,28 +302,29 @@
                     <form>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="itemId" class="form-label">Item ID</label>
-                                <input type="text" class="form-control" id="itemId" placeholder="Enter Item ID">
+                                <label for="ItemId-Order" class="form-label">Item ID</label>
+                                <select class="form-control" id="ItemId-Order"></select>
                             </div>
                             <div class="col-md-6">
                                 <label for="itemDescription" class="form-label">Description</label>
-                                <input type="text" class="form-control" id="itemDescription" placeholder="Item Description">
+                                <input type="text" class="form-control" id="itemDescription" placeholder="Item Description" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="qtyOnHand" class="form-label">Qty On Hand</label>
-                                <input type="text" class="form-control" id="qtyOnHand" placeholder="Qty Available">
+                                <input type="text" class="form-control" id="qtyOnHand" placeholder="Qty Available" readonly>
                             </div>
                             <div class="col-md-6">
                                 <label for="orderingQty" class="form-label">Ordering Qty</label>
                                 <input type="number" class="form-control" id="orderingQty" placeholder="Qty to Order">
                             </div>
                         </div>
-                        <button type="button" class="btn btn-purple w-100">Add to Cart</button>
+                        <button type="button" id="addToCartBtn" class="btn btn-purple w-100">Add to Cart</button>
                     </form>
                 </div>
             </div>
+
 
             <!-- Order Summary Section -->
             <div class="col-md-6">
@@ -342,7 +344,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="balance" class="form-label">Balance</label>
-                                <input type="text" class="form-control" id="balance" placeholder="Balance">
+                                <input type="text" class="form-control" id="balance" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -353,14 +355,40 @@
                                 Sub Total: <span id="subTotal">0</span> /=
                             </div>
                         </div>
-                        <button type="button" class="btn btn-purple w-100">Place Order</button>
+                        <button type="button" id="placeOrderBtn" class="btn btn-purple w-100">Place Order</button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <div class="container">
+            <!-- Order History Section -->
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="order-card" id="order-history-card">
+                        <h5>Order History</h5>
+                        <table class="table table-bordered" id="orderHistoryTable">
+                            <thead>
+                            <tr>
+                                <th scope="col">Order No</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Discount</th>
+                                <th scope="col">Net Total</th>
+                                <th scope="col">Items</th>
+                            </tr>
+                            </thead>
+                            <tbody id="orderHistoryList">
+                            <!-- Dynamic Order History Rows Will Go Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </section>
-
 <script src="assets/lib/jquery-3.7.1.min.js"></script>
 <script>
     let loginbtn = document.getElementById("loginbutton");
@@ -503,6 +531,7 @@
 </script>
 <script src="Controller/CustomerController.js" type="module"></script>
 <script src="Controller/ItemController.js" type="module"></script>
+<script src="Controller/OrderController.js" type="module"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
