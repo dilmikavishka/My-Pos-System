@@ -18,7 +18,6 @@
     font-weight: bold;
 }
 
-/* Adjust form margins on small screens */
 @media (max-width: 768px) {
     .order-card {
         padding: 15px;

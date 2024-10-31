@@ -41,15 +41,15 @@ nav{
 }
 
 
-/* Responsive Adjustments */
+
 @media (max-width: 992px) {
     .navbar-nav {
         margin-top: 10px;
-        margin-right: 100px; /* Adjust margin-right for medium screens */
+        margin-right: 100px;
     }
 
     .nav-item {
-        margin-right: 20px; /* Reduce spacing between nav items */
+        margin-right: 20px;
     }
 
     .navbar {
@@ -58,40 +58,39 @@ nav{
     }
 
     .navbar-brand, .navbar-nav .nav-link {
-        line-height: normal; /* Reset line height on smaller screens */
+        line-height: normal;
     }
 
     .nav-link {
-        font-size: 18px; /* Slightly reduce font size for smaller screens */
+        font-size: 18px;
     }
 
     .navbar-brand {
-        font-size: 25px; /* Adjust brand size for smaller screens */
+        font-size: 25px;
     }
 }
 
 @media (max-width: 768px) {
-    /* Start nav links from the left */
     .navbar-nav {
         margin-right: 0;
-        text-align: left; /* Align links to the left */
+        text-align: left;
     }
 
     .nav-item {
-        margin-right: 0; /* Remove right margin for mobile devices */
-        margin-bottom: 10px; /* Add bottom margin for spacing */
+        margin-right: 0;
+        margin-bottom: 10px;
     }
 
     .nav-link {
         display: inline-block;
-        font-size: 16px; /* Further reduce font size for mobile */
+        font-size: 16px;
     }
 
     .navbar-brand {
-        font-size: 22px; /* Reduce brand size further on mobile */
+        font-size: 22px;
     }
 
     .navbar-collapse {
-        text-align: left; /* Align collapsed menu to the left */
+        text-align: left;
     }
 }
